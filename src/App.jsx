@@ -55,11 +55,13 @@ function App() {
             setIsMuted(false);
         }
     };
-    const resetGame = () => {
+    const resetGame = (event) => {
+        const {name} = event.target;
         setBoard(Array(16).fill(null));
         setTurn(players.PLAYER1);
         setPoints({ player1: 0, player2: 0 })
         setWinner(false)
+        name === "Exit" && setPlayersNames({ player1: "", player2: "" });
     };
     
 
@@ -70,9 +72,9 @@ function App() {
     useEffect(() => {
         if (points.player1 + points.player2 === 8) {
             if (points.player1 > points.player2)
-                setWinner({ status: true, player: playersNames.player1 })
-            if (points.player1 < points.player2)
-                setWinner({ status: true, player: playersNames.player2 })
+               return setWinner({ status: true, player: playersNames.player1 })
+            else if (points.player1 < points.player2)
+                return  setWinner({ status: true, player: playersNames.player2 })
             else
                 setWinner({ status: true, player: "Draw" })
         }
@@ -80,7 +82,7 @@ function App() {
     },[points])
 
     return (
-        <main className="bg-lime-500 w-screen h-screen text-teal-900 text-8xl font-bold flex flex-col items-center justify-center gap-9">
+        <main className="bg-lime-500 w-screen h-screen text-teal-900 text-8xl font-bold flex flex-col items-center justify-around p-8">
             {!playersNames.player1 && (
                 <Welcome setPlayersNames={setPlayersNames} playersNames={playersNames} />
             )}
@@ -93,10 +95,20 @@ function App() {
                 alt=""
             />
 
-            {winner.status && <WinnerModal player={winner.player} resetGame={resetGame}/>}
-
-            <button className="bg-teal-900 text-white text-xl hover:text-orange-200 w-48 h-12 rounded-md" onClick={resetGame}>Reset Game</button>
-
+            {winner.status && <WinnerModal player={winner.player} resetGame={resetGame} />}
+            <div className="flex gap-4">
+                <button
+                    className="bg-teal-800 hover:bg-teal-900 text-white text-xl hover:text-orange-200 w-48 h-12 rounded-md"
+                    onClick={resetGame}>
+                    Reset Game
+                </button>
+                <button
+                    className="bg-teal-800 hover:bg-teal-900 text-white text-xl hover:text-orange-200 w-48 h-12 rounded-md"
+                    name="Exit"
+                    onClick={resetGame}>
+                    Exit
+                </button>
+            </div>
             <section className="flex flex-row items-center gap-9">
                 <Board
                     board={board}
