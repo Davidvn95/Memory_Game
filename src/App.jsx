@@ -11,6 +11,7 @@ import welcomeSound from "./assets/sounds/Welcome_memoryGame.mp3";
 import volumenImage from "./assets/images/volumen.png";
 import muteImage from "./assets/images/mute.png";
 import { WinnerModal } from "./components/WinnerModal";
+import Logo from './assets/images/Logo.jpeg'
 
 const sound = new Howl({
     src: [welcomeSound],
@@ -86,6 +87,7 @@ function App() {
             {!playersNames.player1 && (
                 <Welcome setPlayersNames={setPlayersNames} playersNames={playersNames} />
             )}
+            <img src={Logo} alt="" className="w-32 h-32 rounded-xl absolute top-8 left-60 z-10" />
             <h1>Memory Game</h1>
 
             <img
