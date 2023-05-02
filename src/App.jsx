@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Howl } from "howler";
 import { Welcome } from "./components/Welcome";
-import { images } from "./utils/data";
+import { sortBoard } from "./logic/logicGame";
 import { players } from "./constants";
 import { Board } from "./components/Board";
 import { ButtonPlayers } from "./components/ButtonPlayers";
@@ -20,10 +20,7 @@ const sound = new Howl({
 });
 
 function App() {
-    const [data] = useState(() => {
-        const shuffled = [...Object.values(images), ...Object.values(images)];
-        return shuffled.sort(() => Math.random() - 0.5);
-    });
+    const [data, setData] = useState(sortBoard());
     const [board, setBoard] = useState(Array(16).fill(null));
     const [turn, setTurn] = useState(players.PLAYER1);
     const [isMuted, setIsMuted] = useState(false);
@@ -62,6 +59,7 @@ function App() {
         setTurn(players.PLAYER1);
         setPoints({ player1: 0, player2: 0 })
         setWinner(false)
+        setData(sortBoard());
         name === "Exit" && setPlayersNames({ player1: "", player2: "" });
     };
     
@@ -83,16 +81,20 @@ function App() {
     },[points])
 
     return (
-        <main className="bg-lime-500 w-screen h-screen text-teal-900 text-8xl font-bold flex flex-col items-center justify-around p-8">
+        <main className="bg-lime-500 w-screen h-screen lg:max-h-screen overflow-hidden overflow-y-auto lg:overflow-y-hidden text-teal-900 font-bold flex flex-col items-center justify-center gap-10 p-8">
             {!playersNames.player1 && (
                 <Welcome setPlayersNames={setPlayersNames} playersNames={playersNames} />
             )}
-            <img src={Logo} alt="" className="w-32 h-32 rounded-xl absolute top-8 left-60 z-10" />
-            <h1>Memory Game</h1>
+            <img
+                src={Logo}
+                alt=""
+                className="w-24 h-24 lg:w-32 lg:h-32 rounded-xl absolute top-16 right-5 z-10"
+            />
+            <h1 className="text-6xl mt-48 lg:m-0 -ml-4 lg:text-7xl">Memory Game</h1>
 
             <img
                 src={!isMuted ? volumenImage : muteImage}
-                className="w-14 h-14 absolute top-8 right-40 z-30 cursor-pointer"
+                className="w-10 h-10 lg:w-14 lg:h-14 absolute top-3 lg:top-8 lg:right-40 z-30 cursor-pointer"
                 onClick={toggleSound}
                 alt=""
             />
@@ -100,18 +102,18 @@ function App() {
             {winner.status && <WinnerModal player={winner.player} resetGame={resetGame} />}
             <div className="flex gap-4">
                 <button
-                    className="bg-teal-800 hover:bg-teal-900 text-white text-xl hover:text-orange-200 w-48 h-12 rounded-md"
+                    className="bg-teal-800 hover:bg-teal-900 text-white text-xl hover:text-orange-200 w-40 h-11 lg:w-48 lg:h-12 rounded-md"
                     onClick={resetGame}>
                     Reset Game
                 </button>
                 <button
-                    className="bg-teal-800 hover:bg-teal-900 text-white text-xl hover:text-orange-200 w-48 h-12 rounded-md"
+                    className="bg-teal-800 hover:bg-teal-900 text-white text-xl hover:text-orange-200 w-40 h-11 lg:w-48 lg:h-12 rounded-md"
                     name="Exit"
                     onClick={resetGame}>
                     Exit
                 </button>
             </div>
-            <section className="flex flex-row items-center gap-9">
+            <section className="flex flex-col lg:flex-row items-center lg:gap-9">
                 <Board
                     board={board}
                     setBoard={setBoard}

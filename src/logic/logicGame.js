@@ -2,12 +2,15 @@ import { players } from "../constants";
 import confetti from "canvas-confetti";
 import { Howl } from "howler";
 import WinnerSound from '../assets/sounds/Winning.mp3'
+import { images } from "../utils/data";
 
 const sound = new Howl({
     src: [WinnerSound],
     volume: 0.5,
     loop: false,
 })
+
+// * Función que hace la lógica del juego, comprueba si las imagenes són iguales, cambia los turnos
 
 export function checkGame(pair, setPair, index, turn, setTurn, board, setBoard, data, points, setPoints) {
     if (!pair.image) {
@@ -30,12 +33,19 @@ export function checkGame(pair, setPair, index, turn, setTurn, board, setBoard, 
             newBoard[pair.index] = "";
             newBoard[index] = "";
             setBoard(newBoard);
-        }, 2000);
+        }, 1500);
     }
 }
 
 
-// ******************************************************************************************************
+// * Función que reordena el tablero en caso de reinicio o nueva partida.
+
+export function sortBoard() {
+    const shuffled = [...Object.values(images), ...Object.values(images)];
+    return shuffled.sort(() => Math.random() - 0.5);
+}
+
+//* Función que genera los confetines al encontrar una pareja
 
 const count = 200;
 const defaults = {
@@ -75,7 +85,7 @@ function fireConfetti() {
     });
 }
 
-// *********************************************************************************************************
+// * Función que genera los confetines finalizando el juego con un ganador
 
 
 
@@ -111,7 +121,7 @@ export function finalConfetti() {
     }, 250);
 }
 
-// *****************************************************************************************************************
+// * Función que genera los confetines al finalizarl el juego con un empate.
 export function frameSnow() {
     const durationTime = 15 * 1000;
     const animationEnd = Date.now() + durationTime;
@@ -147,3 +157,4 @@ export function frameSnow() {
         }
     })();
 }
+

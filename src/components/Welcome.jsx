@@ -23,14 +23,14 @@ export function Welcome({ setPlayersNames }) {
         },
     });
     return (
-        <div className="absolute w-full h-full bg-lime-500 grid place-items-center z-30">
-            <div className="flex flex-col justify-center items-center h-3/4 w-3/5 rounded-full shadow-lg bg-yellow-200">
-                <span className="text-7xl">Memory Game</span>
+        <div className="absolute w-screen h-screen bg-lime-500 grid place-items-center z-30">
+            <div className="flex flex-col justify-center items-center h-4/5 w-4/5 lg:h-3/4 lg:w-3/5 rounded-3xl lg:rounded-full shadow-lg bg-yellow-200">
+                <span className="text-4xl lg:text-7xl">Memory Game</span>
                 <form
                     action=""
-                    className="flex flex-col gap-12 mt-16"
+                    className="flex flex-col gap-7 lg:gap-12 mt-16"
                     onSubmit={formik.handleSubmit}>
-                    <div className="flex gap-4 relative">
+                    <div className="flex flex-col gap-4 m-auto relative lg:flex-row">
                         <label htmlFor="player1" className="text-5xl text-orange-400">
                             Player 1
                         </label>
@@ -40,7 +40,7 @@ export function Welcome({ setPlayersNames }) {
                             type="text"
                             onChange={formik.handleChange}
                             value={formik.values.player1}
-                            className="w-96 h-14 rounded-xl bg-yellow-200 text-2xl p-4 border-4 border-emerald-900"
+                            className="w-60 h-12 lg:w-96 lg:h-14 rounded-xl bg-yellow-200 text-2xl p-4 border-4 border-emerald-900"
                         />
                         <span className="text-orange-500 text-lg absolute -bottom-8 right-44">
                             {formik.errors.player1 && formik.touched.player1
@@ -48,7 +48,7 @@ export function Welcome({ setPlayersNames }) {
                                 : ""}
                         </span>
                     </div>
-                    <div className="flex gap-4 relative">
+                    <div className="flex flex-col gap-4 m-auto relative lg:flex-row">
                         <label htmlFor="player2" className="text-5xl text-orange-400">
                             Player 2
                         </label>
@@ -58,7 +58,7 @@ export function Welcome({ setPlayersNames }) {
                             type="text"
                             onChange={formik.handleChange}
                             value={formik.values.player2}
-                            className="w-96 h-14 rounded-xl bg-yellow-200 text-2xl p-4 border-4 border-emerald-900"
+                            className="w-60 h-12 lg:w-96 lg:h-14 rounded-xl bg-yellow-200 text-2xl p-4 border-4 border-emerald-900"
                         />
                         <span className="text-orange-500 text-lg absolute -bottom-8 right-44">
                             {formik.errors.player2 && formik.touched.player2
