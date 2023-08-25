@@ -11,17 +11,16 @@ import welcomeSound from "./assets/sounds/Welcome_memoryGame.mp3";
 import volumenImage from "./assets/images/volumen.png";
 import muteImage from "./assets/images/mute.png";
 import { WinnerModal } from "./components/WinnerModal";
-import Logo from './assets/images/Logo.jpeg'
 
 const sound = new Howl({
     src: [welcomeSound],
-    volume: 0.08,
+    volume: 0.1,
     loop: true,
 });
 
 function App() {
-    const [data, setData] = useState(sortBoard());
-    const [board, setBoard] = useState(Array(16).fill(null));
+    const [arrFlippeds, setArrFlippeds] = useState([]);
+    const [board, setBoard] = useState(sortBoard())
     const [turn, setTurn] = useState(players.PLAYER1);
     const [isMuted, setIsMuted] = useState(false);
     const [playersNames, setPlayersNames] = useState({
@@ -37,13 +36,6 @@ function App() {
         player: "",
     });
 
-    const updateBoard = (index) => {
-        if (board[index]) return "ready";
-        const newBoard = [...board];
-        newBoard[index] = data[index];
-        setBoard(newBoard);
-    };
-
     const toggleSound = () => {
         if (!isMuted) {
             sound.pause();
@@ -54,12 +46,15 @@ function App() {
         }
     };
     const resetGame = (event) => {
-        const {name} = event.target;
-        setBoard(Array(16).fill(null));
+        const { name } = event.target;
+        for(const flipped of arrFlippeds) {
+            flipped(false)
+        }
+        setArrFlippeds([])
+        setBoard(sortBoard());
         setTurn(players.PLAYER1);
         setPoints({ player1: 0, player2: 0 })
         setWinner(false)
-        setData(sortBoard());
         name === "Exit" && setPlayersNames({ player1: "", player2: "" });
     };
     
@@ -78,19 +73,19 @@ function App() {
                 setWinner({ status: true, player: "Draw" })
         }
         
-    },[points])
+    },[points, playersNames])
 
     return (
         <main className="bg-lime-500 w-screen h-screen lg:max-h-screen overflow-hidden overflow-y-auto lg:overflow-y-hidden text-teal-900 font-bold flex flex-col items-center justify-center gap-10 p-8">
             {!playersNames.player1 && (
-                <Welcome setPlayersNames={setPlayersNames} playersNames={playersNames} />
+                <Welcome setPlayersNames={setPlayersNames} />
             )}
-            <img
+            {/* <img
                 src={Logo}
                 alt=""
                 className="w-24 h-24 lg:w-32 lg:h-32 rounded-xl absolute top-16 right-5 z-10"
-            />
-            <h1 className="text-6xl mt-48 lg:m-0 -ml-4 lg:text-7xl">Memory Game</h1>
+            /> */}
+            <h1 className="relative text-6xl mt-48 lg:m-0 -ml-4 lg:text-7xl z-30">Memory Game</h1>
 
             <img
                 src={!isMuted ? volumenImage : muteImage}
@@ -116,13 +111,12 @@ function App() {
             <section className="flex flex-col lg:flex-row items-center lg:gap-9">
                 <Board
                     board={board}
-                    setBoard={setBoard}
                     turn={turn}
                     setTurn={setTurn}
-                    updateBoard={updateBoard}
-                    data={data}
                     points={points}
                     setPoints={setPoints}
+                    arrFlippeds={arrFlippeds}
+                    setArrFlippeds={setArrFlippeds}
                 />
                 <section className="flex gap-9 flex-col">
                     <div className="flex justify-center gap-3">

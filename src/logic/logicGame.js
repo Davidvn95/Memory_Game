@@ -12,29 +12,51 @@ const sound = new Howl({
 
 // * Función que hace la lógica del juego, comprueba si las imagenes són iguales, cambia los turnos
 
-export function checkGame(pair, setPair, index, turn, setTurn, board, setBoard, data, points, setPoints) {
+export function checkGame(
+    pair,
+    setPair,
+    turn,
+    setTurn,
+    points,
+    setPoints,
+    image,
+    setFlipped,
+    arrFlippeds,
+    setArrFlippeds
+) {
     if (!pair.image) {
-        setPair({ image: data[index], index });
-        return;
-    } else if (pair.image === data[index]) {
-        setPair({ image: "", index: "" });
-        fireConfetti()
-        sound.play()
-        if (turn === players.PLAYER1) setPoints({...points, player1: points.player1 + 1});
-        if (turn === players.PLAYER2) setPoints({...points, player2: points.player2 + 1})
-
-        setTurn(turn === players.PLAYER1 ? players.PLAYER2 : players.PLAYER1);
-        return;
-    } else {
-        setPair({ image: "", index: "" });
-        setTurn(turn === players.PLAYER1 ? players.PLAYER2 : players.PLAYER1);
+        setPair({image, setFlipped})
+        console.log(typeof image)
+        return
+    } else if (pair.image === image) {
+        setPair({})
+        setArrFlippeds([...arrFlippeds, pair.setFlipped, setFlipped])
         setTimeout(() => {
-            const newBoard = [...board];
-            newBoard[pair.index] = "";
-            newBoard[index] = "";
-            setBoard(newBoard);
-        }, 1500);
+            fireConfetti()
+            sound.play()
+            if (turn === players.PLAYER1) setPoints({ ...points, player1: points.player1 + 1 })
+            if (turn === players.PLAYER2) setPoints({ ...points, player2: points.player2 + 1 })
+        }, 300)
+
+        setTurn(turn === players.PLAYER1 ? players.PLAYER2 : players.PLAYER1)
+        return
+    } else {
+        setTurn(turn === players.PLAYER1 ? players.PLAYER2 : players.PLAYER1)
+        setTimeout(() => {
+            pair.setFlipped(false)
+            setFlipped(false)
+        }, 1200);
+        setPair({})
     }
+}
+
+
+// * Función que actualiza el tablero en cada Click
+export const updateBoard = (index, board, setBoard, data) => {
+    if (board[index]) return 'ready'
+    const newBoard = [...board]
+    newBoard[index] = data[index]
+    setBoard(newBoard)
 }
 
 

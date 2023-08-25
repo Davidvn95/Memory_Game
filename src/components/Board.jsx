@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Square } from "./Square";
 
-export function Board({ board, turn, setTurn, updateBoard, setBoard, data, points, setPoints }) {
+export function Board({ board, turn, setTurn, points, setPoints, arrFlippeds, setArrFlippeds }) {
 
-    const [pair, setPair] = useState({image:'', index:''})
+    const [pair, setPair] = useState({})
     
     return (
-        <section className="grid grid-cols-4 gap-3 justify-center">
+        <section className="grid grid-cols-4 gap-2 justify-center">
             {board.map((image, index) => {
                 return (
                     <Square
@@ -17,12 +17,10 @@ export function Board({ board, turn, setTurn, updateBoard, setBoard, data, point
                         setTurn={setTurn}
                         pair={pair}
                         setPair={setPair}
-                        updateBoard={updateBoard}
-                        board={board}
-                        setBoard={setBoard}
-                        data={data}
                         points={points}
-                        setPoints = {setPoints}
+                        setPoints={setPoints}
+                        arrFlippeds={arrFlippeds}
+                        setArrFlippeds={setArrFlippeds}
                     />
                 );
             })}

@@ -23,15 +23,15 @@ export function Welcome({ setPlayersNames }) {
         },
     });
     return (
-        <div className="absolute w-screen h-screen bg-lime-500 grid place-items-center z-30">
-            <div className="flex flex-col justify-center items-center h-4/5 w-4/5 lg:h-3/4 lg:w-3/5 rounded-3xl lg:rounded-full shadow-lg bg-yellow-200">
-                <span className="text-4xl lg:text-7xl">Memory Game</span>
+        <div className="absolute w-screen h-screen bg-slate-800/40 grid place-items-center z-30">
+            <div className="flex flex-col justify-center items-center bg-yellow-200 p-6 rounded-3xl -mb-9">
+                <span className="text-4xl">Nombre de los jugadores</span>
                 <form
                     action=""
                     className="flex flex-col gap-7 lg:gap-12 mt-16"
                     onSubmit={formik.handleSubmit}>
-                    <div className="flex flex-col gap-4 m-auto relative lg:flex-row">
-                        <label htmlFor="player1" className="text-5xl text-orange-400">
+                    <div className="flex flex-col gap-4 m-auto relative items-center lg:flex-row">
+                        <label htmlFor="player1" className="text-3xl text-orange-400">
                             Player 1
                         </label>
                         <input
@@ -48,8 +48,8 @@ export function Welcome({ setPlayersNames }) {
                                 : ""}
                         </span>
                     </div>
-                    <div className="flex flex-col gap-4 m-auto relative lg:flex-row">
-                        <label htmlFor="player2" className="text-5xl text-orange-400">
+                    <div className="flex flex-col gap-4 m-auto relative items-center lg:flex-row">
+                        <label htmlFor="player2" className="text-3xl text-orange-400">
                             Player 2
                         </label>
                         <input
@@ -67,7 +67,7 @@ export function Welcome({ setPlayersNames }) {
                         </span>
                     </div>
                     <button
-                        className="border-4 border-black rounded-xl p-2 text-5xl w-fit m-auto"
+                        className="border-2 bg-orange-300 border-black rounded-xl p-2 px-4 text-3xl w-fit m-auto"
                         type="submit">
                         Play
                     </button>
