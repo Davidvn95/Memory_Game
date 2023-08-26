@@ -37,7 +37,7 @@ export function Square({
     }, [playing, flipped])
 
     return (
-        <div className={`relative bg-orange-300 border-green-700 border w-24 h-24 flex justify-center items-center font-bold text-6xl text-teal-900 cursor-pointer rounded-xl overflow-hidden card ${
+        <div className={`relative bg-orange-300 border-green-700 border w-[90px] h-[90px] lg:w-24 lg:h-24 flex justify-center items-center font-bold text-6xl text-teal-900 cursor-pointer rounded-xl overflow-hidden card ${
                 flipped ? 'flipped' : ''
             }`}>
             <div className="card-inner h-full w-full">

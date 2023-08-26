@@ -6,7 +6,7 @@ export function WinnerModal({ player, resetGame }) {
         player !== "Draw" ? finalConfetti() : frameSnow()
      },[player])
     return (
-        <div className="w-full h-full grid place-items-center absolute z-30 bg-slate-800 bg-opacity-10 shadow-2xl">
+        <div className="w-full h-full grid place-items-center absolute top-0 z-30 bg-slate-800 bg-opacity-10 shadow-2xl">
             <div className="bg-emerald-600 w-96 h-96 rounded-lg flex flex-col justify-around items-center p-4">
                 <span className="text-white text-2xl">Congratulations:</span>
                 <span className="text-white text-5xl">{player!== "Draw" ? player : "It's a draw"}</span>

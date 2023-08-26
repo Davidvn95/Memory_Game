@@ -26,7 +26,6 @@ export function checkGame(
 ) {
     if (!pair.image) {
         setPair({image, setFlipped})
-        console.log(typeof image)
         return
     } else if (pair.image === image) {
         setPair({})

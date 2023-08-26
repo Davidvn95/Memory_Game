@@ -6,7 +6,7 @@ export function Board({ board, turn, setTurn, points, setPoints, arrFlippeds, se
     const [pair, setPair] = useState({})
     
     return (
-        <section className="grid grid-cols-4 gap-2 justify-center">
+        <section className="grid grid-cols-4 gap-2 justify-center items-center">
             {board.map((image, index) => {
                 return (
                     <Square

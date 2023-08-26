@@ -50,8 +50,10 @@ function App() {
         for(const flipped of arrFlippeds) {
             flipped(false)
         }
+        setTimeout(() => {
+            setBoard(sortBoard());
+        }, 300)
         setArrFlippeds([])
-        setBoard(sortBoard());
         setTurn(players.PLAYER1);
         setPoints({ player1: 0, player2: 0 })
         setWinner(false)
@@ -76,26 +78,24 @@ function App() {
     },[points, playersNames])
 
     return (
-        <main className="bg-lime-500 w-screen h-screen lg:max-h-screen overflow-hidden overflow-y-auto lg:overflow-y-hidden text-teal-900 font-bold flex flex-col items-center justify-center gap-10 p-8">
-            {!playersNames.player1 && (
-                <Welcome setPlayersNames={setPlayersNames} />
-            )}
+        <main className="flex flex-col justify-center items-center p-5 bg-lime-500 w-screen h-screen text-teal-900 font-bold gap-12 lg:gap-10">
+            {!playersNames.player1 && <Welcome setPlayersNames={setPlayersNames} />}
             {/* <img
                 src={Logo}
                 alt=""
                 className="w-24 h-24 lg:w-32 lg:h-32 rounded-xl absolute top-16 right-5 z-10"
             /> */}
-            <h1 className="relative text-6xl mt-48 lg:m-0 -ml-4 lg:text-7xl z-30">Memory Game</h1>
+            <h1 className="relative text-7xl lg:text-7xl z-30">Memory Game</h1>
 
             <img
                 src={!isMuted ? volumenImage : muteImage}
-                className="w-10 h-10 lg:w-14 lg:h-14 absolute top-3 lg:top-8 lg:right-40 z-30 cursor-pointer"
+                className="w-10 h-10 lg:w-14 lg:h-14 absolute top-3 lg:top-8 right-6 lg:right-40 z-30 cursor-pointer"
                 onClick={toggleSound}
                 alt=""
             />
 
             {winner.status && <WinnerModal player={winner.player} resetGame={resetGame} />}
-            <div className="flex gap-4">
+            <div className="flex gap-4 -mt-3 lg:-mt-0">
                 <button
                     className="bg-teal-800 hover:bg-teal-900 text-white text-xl hover:text-orange-200 w-40 h-11 lg:w-48 lg:h-12 rounded-md"
                     onClick={resetGame}>
@@ -108,7 +108,7 @@ function App() {
                     Exit
                 </button>
             </div>
-            <section className="flex flex-col lg:flex-row items-center lg:gap-9">
+            <section className="flex flex-col-reverse lg:flex-row items-center -mt-4 lg:-mt-0 gap-6 lg:gap-9">
                 <Board
                     board={board}
                     turn={turn}
@@ -118,8 +118,8 @@ function App() {
                     arrFlippeds={arrFlippeds}
                     setArrFlippeds={setArrFlippeds}
                 />
-                <section className="flex gap-9 flex-col">
-                    <div className="flex justify-center gap-3">
+                <section className="flex gap-2 lg:gap-9 flex-col">
+                    <div className="flex justify-center gap-14">
                         <ButtonPlayers
                             player={players.PLAYER1}
                             isSelected={turn === players.PLAYER1}
@@ -136,7 +136,7 @@ function App() {
                 </section>
             </section>
         </main>
-    );
+    )
 }
 
 export default App;
