@@ -1,17 +1,13 @@
 export const manifestForPlugin = {
     registerType: "prompt",
-    includeAssets: [/\.html$/, /\.js$/, /\.css$/, /\.png$/, /\.jpg$/],
+    divOptions: {
+        enabled: true,
+    },
     manifest: {
         name: 'Memory Game',
         short_name: 'MemoryGame',
         description: 'Una app de juego de memoria dedáctico para niños',
         "icons": [
-            {
-                "src": './src/assets/images/MemoryGameLogo.jpeg',
-                "sizes": '512x512',
-                "type": 'image/jpeg',
-                "purpose": 'any',
-            },
             {
                 "src": './src/assets/images/maskable_icon.png',
                 "sizes": '1280x1280',
@@ -28,7 +24,9 @@ export const manifestForPlugin = {
         theme_color: '#ffffff',
         background_color: '#84CC16',
         start_url: '/',
+        scope: '/',
         display: 'standalone',
         orientation: 'portrait',
+        prefer_related_applications: false,
     },
 }

@@ -79,7 +79,7 @@ function App() {
     },[points, playersNames])
 
     return (
-        <main className="flex flex-col justify-center items-center p-5 bg-lime-500 w-screen h-screen text-teal-900 font-bold gap-12 lg:gap-10">
+        <main className="flex flex-col justify-around items-center p-5 bg-lime-500 w-screen h-screen text-teal-900 font-bold gap-12 lg:gap-10">
             {!playersNames.player1 && <Welcome setPlayersNames={setPlayersNames} />}
             {/* <img
                 src={Logo}
