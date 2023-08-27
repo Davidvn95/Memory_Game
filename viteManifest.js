@@ -1,30 +1,24 @@
 export const manifestForPlugin = {
-    registerType: "prompt",
+    registerType: 'prompt',
     divOptions: {
         enabled: true,
     },
     manifest: {
         name: 'Memory Game',
         short_name: 'MemoryGame',
-        description: 'Una app de juego de memoria dedáctico para niños',
-        "icons": [
+        description: 'Una app de juego de memoria didáctico para niños',
+        icons: [
             {
-                "src": './src/assets/images/maskable_icon_x512.png',
-                "sizes": '144x144',
-                "type": 'image/png',
-                "purpose": 'any',
+                src: '/android-chrome-192x192.png',
+                sizes: '192x192',
+                type: 'image/png',
+                porpuse: 'any',
             },
             {
-                "src": './src/assets/images/maskable_icon_x512.png',
-                "sizes": '512x512',
-                "type": 'image/png',
-                "purpose": 'maskable',
-            },
-            {
-                "src": './src/assets/images/maskable_icon.png',
-                "sizes": '1280x1280',
-                "type": 'image/png',
-                "purpose": 'maskable',
+                src: '/android-chrome-512x512.png',
+                sizes: '512x512',
+                type: 'image/png',
+                porpuse: 'maskable'
             },
         ],
         theme_color: '#ffffff',
