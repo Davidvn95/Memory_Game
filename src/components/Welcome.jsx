@@ -12,11 +12,11 @@ export function Welcome({ setPlayersNames }) {
             player1: Yup.string()
                 .required("El nombre es Obligatorio")
                 .min(3, "Debe tener al menos 3 caracteres")
-                .max(12, "Debe tener máximo 12 caracteres"),
+                .max(8, "Debe tener máximo 8 caracteres"),
             player2: Yup.string()
                 .required("El nombre es Obligatorio")
                 .min(3, "Debe tener al menos 3 caracteres")
-                .max(12, "Debe tener máximo 12 caracteres"),
+                .max(8, "Debe tener máximo 8 caracteres"),
         }),
         onSubmit: (values) => {
             setPlayersNames(values);
