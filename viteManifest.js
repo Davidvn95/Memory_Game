@@ -18,10 +18,10 @@ export const manifestForPlugin = {
                 src: '/android-chrome-512x512.png',
                 sizes: '512x512',
                 type: 'image/png',
-                porpuse: 'maskable'
+                porpuse: 'maskable',
             },
         ],
-        theme_color: '#ffffff',
+        theme_color: '#134E4A',
         background_color: '#84CC16',
         start_url: '/',
         scope: '/',
@@ -29,4 +29,8 @@ export const manifestForPlugin = {
         orientation: 'portrait',
         prefer_related_applications: false,
     },
+    workbox: {
+        globPatterns: ['./assets/**/*.*'],
+        maximumFileSizeToCacheInBytes: 10000000
+    }
 }
